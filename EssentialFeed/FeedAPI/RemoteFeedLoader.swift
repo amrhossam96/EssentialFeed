@@ -63,21 +63,14 @@ private struct Item: Equatable, Decodable {
     let id: UUID
     let description: String?
     let location: String?
-    let imageURL: URL?
+    let image: URL?
     
     var item: FeedItem {
         FeedItem(
             id: id,
             description: description,
             location: location,
-            imageURL: imageURL
+            imageURL: image
         )
-    }
-    
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case description
-        case location
-        case imageURL = "image"
     }
 }

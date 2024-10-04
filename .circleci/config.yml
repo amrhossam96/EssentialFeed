@@ -15,16 +15,16 @@ jobs:
           name: List Project Files
           command: ls -R ~/project
       - run:
-          name: Run Xcode Tests
+          name: Run Swift Package Tests
           command: |
-            xcodebuild clean build test \
+            xcodebuild test \
               -project EssentialFeed/EssentialFeed.xcodeproj \
               -scheme "CI" \
               CODE_SIGN_IDENTITY="" \
               CODE_SIGNING_REQUIRED=NO
 
 workflows:
-  test-only:
+  test-workflow:
     jobs:
       - test:
           filters:

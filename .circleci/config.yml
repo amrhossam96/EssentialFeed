@@ -3,31 +3,31 @@ version: 2.1
 executors:
   macos-executor:
     macos:
-      xcode: 15.4.0
+      xcode: 15.4.0  # Specify the Xcode version you're using
     working_directory: ~/project
 
 jobs:
-  test:
+  build-and-test:
     executor: macos-executor
     steps:
       - checkout
       - run:
           name: List Project Files
-          command: ls -R ~/project
+          command: ls -R ~/project  # List all files to verify the project structure
       - run:
           name: Run Swift Package Tests
           command: |
-            xcodebuild test \
-              -project EssentialFeed/EssentialFeed.xcodeproj \
-              -scheme "CI" \
+            xcodebuild clean build test \
+              -project EssentialFeed/EssentialFeed.xcodeproj \  # Your project path
+              -scheme "CI" \                                    # Your scheme
               CODE_SIGN_IDENTITY="" \
               CODE_SIGNING_REQUIRED=NO
 
 workflows:
   test-workflow:
     jobs:
-      - test:
+      - build-and-test:
           filters:
             branches:
               only:
-                - main
+                - main  # Only run on push to 'main'

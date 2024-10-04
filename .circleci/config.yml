@@ -3,7 +3,7 @@ version: 2.1
 executors:
   macos-executor:
     macos:
-      xcode: 15.4.0
+      xcode: 15.4.0  # Specify the Xcode version you're using
     working_directory: ~/project
 
 jobs:
@@ -15,16 +15,16 @@ jobs:
           name: Run Xcode Tests
           command: |
             xcodebuild clean build test \
-              -project EssentialFeed/EssentialFeed.xcodeproj \
-              -scheme "CI" \                                    
+              -project EssentialFeed/EssentialFeed.xcodeproj \  # Your project path
+              -scheme "CI" \                                    # Your scheme
               CODE_SIGN_IDENTITY="" \
               CODE_SIGNING_REQUIRED=NO
 
 workflows:
   test-only:
     jobs:
-      - test
-    filters:
-      branches:
-        only:
-          - main
+      - test:
+          filters:
+            branches:
+              only:
+                - main  # Only run on push to 'main'

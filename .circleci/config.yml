@@ -17,11 +17,7 @@ jobs:
       - run:
           name: Run Swift Package Tests
           command: |
-            xcodebuild clean build test \
-              -project EssentialFeed/EssentialFeed.xcodeproj \  # Your project path
-              -scheme "CI" \                                    # Your scheme
-              CODE_SIGN_IDENTITY="" \
-              CODE_SIGNING_REQUIRED=NO
+            xcodebuild clean build test -project EssentialFeed/EssentialFeed.xcodeproj -scheme "CI" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
 workflows:
   test-workflow:

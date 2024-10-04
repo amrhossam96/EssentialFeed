@@ -3,7 +3,7 @@ version: 2.1
 executors:
   macos-executor:
     macos:
-      xcode: 15.4.0  # Specify the Xcode version you're using
+      xcode: 15.4.0
     working_directory: ~/project
 
 jobs:
@@ -13,13 +13,13 @@ jobs:
       - checkout
       - run:
           name: List Project Files
-          command: ls -R ~/project  # List all files to verify the project structure
+          command: ls -R ~/project
       - run:
           name: Run Xcode Tests
           command: |
             xcodebuild clean build test \
-              -project EssentialFeed/EssentialFeed.xcodeproj \  # Your project path
-              -scheme "CI" \                                    # Your scheme
+              -project EssentialFeed/EssentialFeed.xcodeproj \
+              -scheme "CI" \
               CODE_SIGN_IDENTITY="" \
               CODE_SIGNING_REQUIRED=NO
 
@@ -30,4 +30,4 @@ workflows:
           filters:
             branches:
               only:
-                - main  # Only run on push to 'main'
+                - main

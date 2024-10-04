@@ -4,7 +4,11 @@
       "id" : "317B70CF-212B-4022-8018-DE5D71C27A6E",
       "name" : "Configuration 1",
       "options" : {
-
+        "addressSanitizer" : {
+          "enabled" : false
+        },
+        "threadSanitizerEnabled" : false,
+        "undefinedBehaviorSanitizerEnabled" : false
       }
     }
   ],
@@ -17,7 +21,8 @@
           "name" : "EssentialFeed"
         }
       ]
-    }
+    },
+    "threadSanitizerEnabled" : true
   },
   "testTargets" : [
     {

@@ -8,8 +8,4 @@
 import XCTest
 @testable import EssentialFeed
 
-final class EssentialFeedTests: XCTestCase {
-
-   
-
-}
+final class EssentialFeedTests: XCTestCase {}

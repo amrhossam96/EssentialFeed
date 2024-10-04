@@ -12,6 +12,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: List Project Files
+          command: ls -R ~/project  # List all files to verify the project structure
+      - run:
           name: Run Xcode Tests
           command: |
             xcodebuild clean build test \

@@ -60,17 +60,17 @@ class CodableFeedStore {
         try! encoded.write(to: storeURL)
         completion(nil)
     }
-
+    
 }
 
 class CodableFeedStoreTests: XCTestCase {
     
     override func setUp() {
-        try? FileManager.default.removeItem(at: testSpecificStoreURL())
+        setupEmptyStoreState()
     }
     
     override func tearDown() {
-        try? FileManager.default.removeItem(at: testSpecificStoreURL())
+        undoStoreSideEffects()
     }
     
     func test_retrieve_deliversEmptyOnEmptyCache() {
@@ -130,6 +130,18 @@ class CodableFeedStoreTests: XCTestCase {
     }
     
     // MARK: - Helpers
+    
+    private func setupEmptyStoreState() {
+        deleteStoreArtifacts()
+    }
+    
+    private func undoStoreSideEffects() {
+        deleteStoreArtifacts()
+    }
+    
+    private func deleteStoreArtifacts() {
+        try? FileManager.default.removeItem(at: testSpecificStoreURL())
+    }
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> CodableFeedStore {
         let url = testSpecificStoreURL()

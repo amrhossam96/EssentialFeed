@@ -21,11 +21,7 @@ public class CodableFeedStore: FeedStore {
         private let id: UUID
         private let description: String?
         private let location: String?
-        private let url: URL?
-        
-        var local: LocalFeedImage {
-            return LocalFeedImage(id: id, description: description, location: location, url: url)
-        }
+        private let url: URL
         
         init(_ image: LocalFeedImage) {
             id = image.id
@@ -33,8 +29,12 @@ public class CodableFeedStore: FeedStore {
             location = image.location
             url = image.url
         }
+        
+        var local: LocalFeedImage {
+            return LocalFeedImage(id: id, description: description, location: location, url: url)
+        }
     }
-
+    
     private let queue = DispatchQueue(label: "\(CodableFeedStore.self)Queue", qos: .userInitiated, attributes: .concurrent)
     private let storeURL: URL
     
@@ -46,9 +46,9 @@ public class CodableFeedStore: FeedStore {
         let storeURL = self.storeURL
         queue.async {
             guard let data = try? Data(contentsOf: storeURL) else {
-                completion(.empty)
-                return
+                return completion(.empty)
             }
+            
             do {
                 let decoder = JSONDecoder()
                 let cache = try decoder.decode(Cache.self, from: data)
